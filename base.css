@@ -475,7 +475,7 @@
 }
 #app-mount .sidebar-2K8pFh {
   border-radius: 0;
-  background: var(--sidebar-image);
+  background: rgba(255, 255, 255, 1);
 }
 #app-mount .sidebar-2K8pFh .container-PNkimc,
 #app-mount .sidebar-2K8pFh .privateChannels-1nO12o,
