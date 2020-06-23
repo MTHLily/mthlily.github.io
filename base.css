@@ -475,7 +475,7 @@
 }
 #app-mount .sidebar-2K8pFh {
   border-radius: 0;
-  background: url('https://i.imgur.com/pbfNsEc.jpg');
+  background: rgba(0, 0, 0, --left-brightness);
 }
 #app-mount .sidebar-2K8pFh .container-PNkimc,
 #app-mount .sidebar-2K8pFh .privateChannels-1nO12o,
