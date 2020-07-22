@@ -39,6 +39,7 @@ function processExcel( data ){
         });
 
     select.onchange = () => {
+        document.getElementById( 'dvExcel').innerHTML = '';
         console.log( document.getElementById('selectID').value );
         randomInput( document.getElementById('selectID').value );
     };
