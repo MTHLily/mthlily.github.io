@@ -80,8 +80,38 @@ function randomInput( worksheetName ){
         submitBut.innerHTML = 'Get Random Students';
         submitBut.onclick = () =>{ generateStudents( excelRows, input.value ) };
 
+        var checkboxDiv = document.createElement( 'div' );
+        checkboxDiv.className = 'w-50 p-1';
+        checkboxDiv.innerHTML += '<div>Years to Include</div>';
+
+        for( var y = 1; y <= 5; y++ ){
+
+            var yearCheckboxes = document.createElement( 'div' );
+            yearCheckboxes.className = 'form-check-inline';
+
+            var label = document.createElement( 'label' );
+            label.className = 'form-check-label pr-1 pl-1';
+
+            var checkbox = document.createElement( 'input' );
+            checkbox.type = 'checkbox';
+            checkbox.className = 'form-check-input';
+            checkbox.setAttribute( 'checked', true );
+            checkbox.name = 'yearCheck';
+            checkbox.value = y;
+
+            label.appendChild( checkbox );
+            label.innerHTML += ' ' + y;
+
+            yearCheckboxes.appendChild( label );
+            checkboxDiv.appendChild( yearCheckboxes );
+
+        }
+
         div.appendChild( input );
+        div.appendChild( checkboxDiv );
         div.appendChild( submitBut );
+
+        console.log( document.getElementsByName('yearCheck') );
     }
     else{
         div.innerHTML = "<h1>Not a student sheet</h1>"
@@ -93,26 +123,48 @@ function randomInput( worksheetName ){
 
 function generateStudents( rows, no ){
 
-    var accepted = [], rejected = [], randomlySelected = [];
+    var accepted = [], rejected = [], randomlySelected = [], years = [];
+
+    document.getElementsByName( 'yearCheck' ).forEach( ( check )=>{
+        if( check.checked == true )
+            years.push( parseInt(check.value) );
+    });
+
+    console.log( "YEars: " );
+    console.log( years );
 
     rows.forEach( ( row )=>{
-        if( isValidRow( row ) )
+        if( studentFilter( row, years ) )
             accepted.push( row );
         else
             rejected.push( row );
     } );
 
+
+    var tableDiv = document.getElementById( 'dvExcel' );
+    tableDiv.innerHTML = '';
+
+    if( accepted.length == 0 ){
+        tableDiv.innerHTML = '<h1>No Student matches your filter</h1>'
+        return;
+    }
+
     shuffle( accepted );
 
-    for( var x = 0; x < no; x++ )
-        randomlySelected.push( accepted.pop() );
+    if( no > accepted.length ){
+        tableDiv.innerHTML = '<h3>Needed students greater than students available. Only have ' + accepted.length + ' students</h3>';
+        for( var x = 0; x < accepted.length; x++ )
+            randomlySelected.push( accepted.pop() );
+    }
+    else{
+        for( var x = 0; x < no; x++ )
+            randomlySelected.push( accepted.pop() );
+    }
 
     console.log( randomlySelected );
 
-    var tableDiv = document.getElementById( 'dvExcel' );
     var table = document.createElement( 'table' );
 
-    tableDiv.innerHTML = '';
 
     table.className = 'tbl w-100'
 
@@ -149,11 +201,13 @@ function generateStudents( rows, no ){
     table.appendChild( header );
 
     randomlySelected.forEach( (selected) =>{
+
         var row = document.createElement( 'tr' );
         
         cell = document.createElement( 'td' );
         cell.innerHTML = selected.No;
         row.appendChild( cell );
+
 
         cell = document.createElement( 'td' );
         cell.innerHTML = selected['First Name'];
@@ -213,6 +267,10 @@ function isValidRow(k) {
 
   return keys.includes( 'First Name' ) && keys.includes( 'Last Name') && keys.includes( 'Programme' );
 
+}
+
+function studentFilter( row, years ){
+    return years.includes( row['Year Level'] ) && isValidRow(row);
 }
 
 $(".custom-file-input").on("change", function() {
