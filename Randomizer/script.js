@@ -1,4 +1,5 @@
 var workbook;
+var warning = [ "GUE", "MANZANARES", "BALILI", "AMPOLOQUIO", "CALUNSAG", "MARCELO", "GEREZ", "ESTOQUE", "CATOR", "SOLIMAN", "GREGORIO", "CUTIN", "PEÑA", "LIKIT", "ICAO", "BRAGA", "LURICA", "DEJITO", "CLAUDIO", "CASTILLO", "SALDAÑA", "TADIQUE", "YACAPIN", "MANUEL", "RACHMAN", "UCAB", "ESPERA", "MANLANGIT", "ARGUELLES", "GUMAHIN", "ELOY", "RELLOSO", "MATCHON", "VILLACAMPA", "TAPING", "SINGH" ];
 
 function Upload(){
 
@@ -130,15 +131,16 @@ function generateStudents( rows, no ){
             years.push( parseInt(check.value) );
     });
 
-    console.log( "YEars: " );
-    console.log( years );
-
     rows.forEach( ( row )=>{
         if( studentFilter( row, years ) )
             accepted.push( row );
         else
             rejected.push( row );
     } );
+
+    console.log("REJECTED");
+    console.log( rejected );
+    console.log( "END REJECTED" );
 
 
     var tableDiv = document.getElementById( 'dvExcel' );
@@ -203,6 +205,10 @@ function generateStudents( rows, no ){
     randomlySelected.forEach( (selected) =>{
 
         var row = document.createElement( 'tr' );
+
+        if( warning.includes(selected['Last Name'] ) ){
+            row.style = "background: yellow;";
+        }
         
         cell = document.createElement( 'td' );
         cell.innerHTML = selected.No;
@@ -264,6 +270,9 @@ function shuffle(array) {
 
 function isValidRow(k) {
   var keys = Object.keys(k);
+
+    if( k['Last Name'] == 'TAPING' )
+        console.log( "TAPING WAS HERE" );
 
   return keys.includes( 'First Name' ) && keys.includes( 'Last Name') && keys.includes( 'Programme' );
 
