@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wehelp</title>
+
+    <!-- Import Boostrap4 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div class="my-4" id="app">
+      <!-- Start Page -->
+      <div v-if="step==1">
+        <div class="container d-flex flex-column align-items-center">
+          <div class="h-25 d-flex justify-content-center">
+            <img src="logo.png" class="w-50" />
+          </div>
+          <h1 class="display-3 text-center">Welcome User!</h1>
+          <p class="lead">
+            WeHelp is an app developed by a group of law students in order to
+            give aid to those who are victims of abuse.
+          </p>
+          <p class="lead">
+            During the pandemic, there have been increasing reports of domestic
+            abuse cases. Domestic violence hotlines all over the world have seen
+            a surge in calls. Wehelp aims to give victims of abuse advice on
+            whether they can file a case under RA 9262 or the “Anti-Violence
+            Against Women and Their Children Act of 2004” and what steps they
+            need to do should they proceed to filing the case.
+          </p>
+          <button class="btn btn-outline-info" @click="stepInd++">
+            I understand.
+          </button>
+        </div>
+      </div>
+
+      <!-- Language Select (Not Working) -->
+      <div v-if="step==2" class="container">
+        <h1 class="display-3 text-center">Please select your language</h1>
+        <div class="d-flex mt-4">
+          <button class="btn btn-outline-info w-75 mx-4" @click="stepInd++">
+            English
+          </button>
+          <button class="btn btn-outline-warning w-75 mx-4" @click="stepInd++">
+            Tagalog
+          </button>
+        </div>
+      </div>
+
+      <!-- Confidentiality of Information -->
+      <div v-if="step==3">
+        <div class="container d-flex flex-column">
+          <h1 class="display-4 text-center">Confidentiality of Information</h1>
+
+          <div class="jumbotron">
+            <p class="lead">
+              Hello User! Whatever information you may have provided to Wehelp
+              will be kept confidential.
+            </p>
+            <p class="lead">
+              We will not disclose your personal information to a third party
+              without your consent, unless we are required or authorized to do
+              so by law or other regulation.
+            </p>
+          </div>
+          <button class="btn btn-outline-info" @click="stepInd++">Next</button>
+        </div>
+      </div>
+
+      <!-- Are you a victim of Violence? -->
+      <div v-if="step==4">
+        <div class="container d-flex flex-column">
+          <h1 class="display-2 text-center">Are you a victim of violence?</h1>
+          <div class="d-flex w-100 mt-5">
+            <button class="btn btn-outline-info w-100 mx-4" @click="stepInd++">
+              Yes
+            </button>
+            <button
+              class="btn btn-outline-danger w-100 mx-4"
+              @click="stepInd=0"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kinds of Violence Experienced -->
+      <div v-if="step==5">
+        <div class="container d-flex flex-column">
+          <h1 class="display-4 text-center">
+            What kind of violence have you experienced?
+          </h1>
+          <div class="jumbotron">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="6"
+                v-model="sections"
+                id="violence-1"
+              />
+              <label class="form-check-label" for="violence-1">
+                Physical harm, including threats or attempts to inflict the same
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="7"
+                v-model="sections"
+                id="violence-7"
+              />
+              <label class="form-check-label" for="violence-7">
+                Being placed in fear of physical harm
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="8"
+                v-model="sections"
+                id="violence-2"
+              />
+              <label class="form-check-label" for="violence-2">
+                Deprivation of custody of your child, including threats to do
+                the same or Deprivation of financial support
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="9"
+                v-model="sections"
+                id="violence-3"
+              />
+              <label class="form-check-label" for="violence-3">
+                Control of your actions by your partner’s inflicting physical
+                harm upon himself
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="10"
+                v-model="sections"
+                id="violence-4"
+              />
+              <label class="form-check-label" for="violence-4">
+                Forcing you to engage in sexual activity, including attempts to
+                do the same
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="11"
+                v-model="sections"
+                id="violence-5"
+              />
+              <label class="form-check-label" for="violence-5">
+                Staking you or following you in several places, entering your
+                dwelling, destroying your property
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="12"
+                v-model="sections"
+                id="violence-6"
+              />
+              <label class="form-check-label" for="violence-6">
+                Causing mental or emotional anguish/ public ridicule or
+                humiliation to your or your child
+              </label>
+            </div>
+          </div>
+          <div class="d-flex w-100">
+            <button
+              class="btn w-100 mx-4 btn-outline-danger"
+              @click="stepInd--"
+            >
+              Back
+            </button>
+            <button
+              class="btn w-100 mx-4 btn-outline-info"
+              :disabled="sections.length == 0"
+              @click="initializeSections"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Questionnaires If you want to edit the questions, go to app.js and find the sectionDetails -->
+      <div
+        v-for="(section, index) in sectionDetails"
+        :key="section.index"
+        class="container"
+        v-if="step == ( 6 + index)"
+      >
+        <h1 class="display-3 text-center">{{section.title}}</h1>
+        <div class="jumbotron">
+          <div
+            class="form-check mt-3"
+            v-for="(question, q_index) in section.questions"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="question.value"
+              :id="`${section.slug}${q_index}`"
+            />
+            <label class="form-check-label" :for="`${section.slug}${q_index}`">
+              {{question.question}}
+            </label>
+          </div>
+        </div>
+        <div>
+          <div class="d-flex w-100">
+            <button
+              class="btn w-100 mx-4 btn-outline-danger"
+              @click="stepInd--"
+            >
+              Back
+            </button>
+            <button class="btn w-100 mx-4 btn-outline-info" @click="stepInd++">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- List of Cases that Can be Filed -->
+      <div v-if="step==13">
+        <div class="container d-flex flex-column">
+          <div v-if="canFile">
+            <h1 class="display-5 text-center">
+              You can file a case for VAWC under the following sections...
+            </h1>
+            <div class="jumbotron">
+              <p class="lead">
+                SECTION 5. Acts of Violence Against Women and Their Children.-
+                The crime of violence against women and their children is
+                committed through any of the following acts:
+              </p>
+              <div
+                class="alert alert-danger"
+                v-for="validCase in validCases"
+                :key="validCase.title"
+                v-if="validCase.valid"
+              >
+                {{validCase.description}}
+              </div>
+            </div>
+            <h1 class="display-5">How do you want to proceed with this?</h1>
+            <div class="alert alert-danger mt-4">
+              <h6>Something to consider:</h6>
+              <p class="lead">
+                Proceeding with this case may require you to confront your
+                aggressor.
+              </p>
+            </div>
+            <div class="d-flex flex-column w-100 align-items-center">
+              <button class="btn btn-warning w-75 my-4" @click="stepInd++">
+                File the case personally
+              </button>
+
+              <div class="d-flex flex-column w-75">
+                <button class="btn btn-info" @click="stepInd+=2">
+                  Seek the help of a lawyer
+                </button>
+                <small class="text-center text-muted"
+                  >The report and affidavit complaint will be sent to him/her.
+                  Appropriate consultation fee may apply.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div v-else class="d-flex flex-column">
+            <h1 class="display-4 text-center">
+              Unfortunately, you cannot file any cases in your situation.
+            </h1>
+            <p class="lead">Would you like to review your form?</p>
+            <div class="w-100 d-flex">
+              <button
+                class="btn btn-outline-info w-100 mx-4"
+                @click="stepInd=3"
+              >
+                Yes
+              </button>
+              <button
+                class="btn btn-outline-danger w-100 mx-4"
+                @click="stepInd=0"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How You Can Do it Personally -->
+      <div v-if="step==14">
+        <div class="container d-flex flex-column">
+          <h1 class="display-4 text-center">How you can do it personally:</h1>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-justify">
+              1. You may put your narration in writing and state that you are
+              filing a case against the offender for the violation of Republic
+              Act No. 9262, under the specific section/s provided by our
+              application.
+              <small class="text-danger"
+                >Remember to place your name, age, and address, as well as that
+                of the offending party.</small
+              >
+              <br />
+              <small>
+                <a href="#"
+                  >Click to download a template of an affidavit complaint</a
+                ></small
+              >
+            </li>
+            <li class="list-group-item text-justify">
+              2. Go to the Prosecution Office of your locality and fill up the
+              required forms.
+            </li>
+            <li class="list-group-item text-justify">
+              3. Go to the prosecutor scheduled to take oaths on that day and
+              sign all pages of the affidavit-complaint in his/her presence.
+            </li>
+            <li class="list-group-item text-justify">
+              4. The prosecutor will have you sworn under oath and he/she will
+              affix his/her signature on the affidavit-complaint.
+            </li>
+            <li class="list-group-item text-justify">
+              5. Submit the affidavit-complaint to the clerk of the prosecution
+              office.
+            </li>
+          </ul>
+
+          <h4 class="display-6 mt-4">
+            That’s the process if you wish to proceed with the case yourself.
+          </h4>
+          <p class="mt-2 lead text-center">
+            Would you like use to connect you with a lawyer instead? <br />
+            <small
+              >The report and affidavit complaint will be sent to him/her.
+              Appropriate consultation fee may apply.
+            </small>
+          </p>
+          <div class="d-flex w-100">
+            <button class="btn w-75 mx-4 btn-outline-info" @click="stepInd++">
+              Yes
+            </button>
+            <button class="btn w-75 mx-4 btn-outline-danger" @click="stepInd=0">
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Details -->
+      <div v-if="step==15">
+        <div class="container d-flex flex-column">
+          <h1 class="display-4 text-center">
+            Fill in the following information:
+          </h1>
+
+          <div class="jumbotron">
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                v-model="userDetails.name"
+                id="name"
+                type="text"
+                class="form-control"
+              />
+              <small class="form-text text-muted">You can use an alias.</small>
+            </div>
+            <div class="form-group">
+              <label>E-mail Address</label>
+              <input
+                v-model="userDetails.email"
+                id="email"
+                type="text"
+                class="form-control"
+              />
+              <small class="form-text text-muted"></small>
+            </div>
+            <div class="form-group row mt-4">
+              <div class="col-4">Relationship Status</div>
+              <div class="col-8">
+                <div class="form-check form-check-inline mx-4">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="relationship_status"
+                    id="single"
+                    value="single"
+                    v-model="userDetails.relationshipStatus"
+                  />
+                  <label for="single" class="form-check-label">Single</label>
+                </div>
+                <div class="form-check form-check-inline mx-4">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="relationship_status"
+                    value="married"
+                    id="married"
+                    v-model="userDetails.relationshipStatus"
+                  />
+                  <label for="married" class="form-check-label">Married</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="affidavitComplaint" class="col-4 col-form-label"
+                >Affidavit Complaint</label
+              >
+              <div class="col-8">
+                <input
+                  type="file"
+                  class="custom-file"
+                  @change="fileUpload"
+                  id="affidavitComplaint"
+                  placeholder="Affidavit Complaint"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-outline-info"
+            @click="stepInd++"
+            :disabled="userDetails.name == '' || userDetails.email == '' || userDetails.relationshipStatus== '' || userDetails.affidavitComplaint.length == 0"
+            id="btnUserDetails"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+      <!-- End Screen -->
+      <div v-if="step==16" class="container">
+        <div class="h-25 d-flex justify-content-center">
+          <img src="logo.png" class="w-25" />
+        </div>
+        <h1 class="display-5 text-center">
+          Thank you for using our app. <br />
+          Please see reference numbers below:
+        </h1>
+        <p class="lead mt-4 border border-dark p-2">
+          Philippine National Police (PNP)
+          <br />
+          Emergency Hotline: 117 (02) 8722-0650 <br />
+          Text hotline: 0917-847-5757 <br />
+          <br />
+          Contact Us: 0929-544-2300
+        </p>
+      </div>
+    </div>
+    <!-- <script src="./app.js"></script> -->
+    <script>
+      let app = new Vue({
+        el: "#app",
+        computed: {
+          stepOrder() {
+            return [1, 2, 3, 4, 5, ...this.sections, 13, 14, 15, 16];
+          },
+          step() {
+            return this.stepOrder[this.stepInd];
+          },
+          canFile() {
+            return true;
+            return this.validCases.map((c) => c.valid).includes(true);
+          },
+          validCases() {
+            // console.log("CHECK FOR ABC");
+            const section_abc =
+              this.sectionDetails[0].questions[3].value == true &&
+              this.sectionDetails[0].questions[4].value == true &&
+              (this.sectionDetails[0].questions[0].value == true ||
+                this.sectionDetails[0].questions[1].value == true ||
+                this.sectionDetails[0].questions[2].value == true);
+
+            // console.log("CHECK FOR ABC");
+            const section_d =
+              this.sectionDetails[1].questions[3].value == true &&
+              this.sectionDetails[1].questions[4].value == true &&
+              this.sectionDetails[1].questions[0].value == true &&
+              this.sectionDetails[1].questions[1].value == true &&
+              this.sectionDetails[1].questions[2].value == true;
+
+            // console.log("CHECK FOR ABC");
+            const section_e =
+              this.sectionDetails[2].questions[0].value == true &&
+              this.sectionDetails[2].questions[1].value == true &&
+              this.sectionDetails[2].questions[2].value == true &&
+              this.sectionDetails[2].questions[3].value == true &&
+              this.sectionDetails[2].questions[4].value == true &&
+              this.sectionDetails[2].questions[5].value == true &&
+              this.sectionDetails[2].questions[6].value == true;
+
+            // console.log("CHECK FOR ABC");
+            const section_f =
+              this.sectionDetails[3].questions[2].value == true &&
+              this.sectionDetails[3].questions[3].value == true &&
+              (this.sectionDetails[3].questions[0].value == true ||
+                this.sectionDetails[3].questions[1].value == true);
+
+            // console.log("CHECK FOR ABC");
+            const section_g =
+              this.sectionDetails[4].questions[0].value == true &&
+              this.sectionDetails[4].questions[4].value == true &&
+              this.sectionDetails[4].questions[5].value == true &&
+              (this.sectionDetails[4].questions[1].value == true ||
+                this.sectionDetails[4].questions[2].value == true ||
+                this.sectionDetails[4].questions[3].value == true);
+
+            // console.log("CHECK FOR ABC");
+            const section_h =
+              this.sectionDetails[5].questions[5].value == true &&
+              this.sectionDetails[5].questions[6].value == true &&
+              (this.sectionDetails[5].questions[0].value == true ||
+                this.sectionDetails[5].questions[1].value == true ||
+                this.sectionDetails[5].questions[2].value == true ||
+                this.sectionDetails[5].questions[3].value == true ||
+                this.sectionDetails[5].questions[4].value == true);
+            // console.log("CHECK FOR ABC");
+            const section_i =
+              this.sectionDetails[6].questions[0].value == true &&
+              this.sectionDetails[6].questions[5].value == true &&
+              this.sectionDetails[6].questions[6].value == true &&
+              (this.sectionDetails[6].questions[1].value == true ||
+                this.sectionDetails[6].questions[2].value == true ||
+                this.sectionDetails[6].questions[3].value == true ||
+                this.sectionDetails[6].questions[4].value == true);
+            // console.log("CHECK FOR ABC");
+            console.log(section_abc);
+            return [
+              {
+                title: "section_abc",
+                valid: section_abc,
+                description:
+                  "(a/b/c) Physical Harm/ Threatening to cause physical harm/Attempting to cause Physical Harm",
+              },
+              {
+                title: "section_d",
+                valid: section_d,
+                description: "(d) Placing you in fear of physical harm",
+              },
+              {
+                title: "section_e",
+                valid: section_e,
+                description:
+                  "(e) Threatening to deprive/ depriving you or your child of custody of your family/ Depriving or threatening to deprive you of financial support/ Deliberately providing you insufficient support/ Depriving or threatening to deprive you of your legal rights/ Preventing you from engaging in any legitimate profession or occupation / Solely controlling conjugal or common properties",
+              },
+              {
+                title: "section_f",
+                valid: section_f,
+                description:
+                  "(f) Controlling your actions by inflicting physical harm on him or herself",
+              },
+              {
+                title: "section_g",
+                valid: section_g,
+                description:
+                  "(g) Causing or attempting to cause you to engage in any sexual activity by threat or force",
+              },
+              {
+                title: "section_h",
+                valid: section_h,
+                description:
+                  "(h) Stalking or following you in public or private places/ Peering through your window/ Lingering outside your residence/ Entering or remaining in your dwelling or property against your will/ Destroying your property and personal belongings/ Inflicting harm to your animals or pets/ Engaging in any form of harassment or violence",
+              },
+              {
+                title: "section_i",
+                valid: section_i,
+                description:
+                  "(i) Causing mental or emotional anguish/ public ridicule or humiliation to your or your child, including, (i.e. repeated verbal and emotional abuse/denial of financial support or custody of minor children of access to your child/children.)",
+              },
+            ];
+          },
+        },
+        data: {
+          stepInd: 0,
+          sections: [],
+          userDetails: {
+            name: "",
+            email: "",
+            relationshipStatus: "",
+            affidavitComplaint: [],
+          },
+          sectionDetails: [
+            {
+              title: "Physical Harm",
+              slug: "s-ph-",
+              questions: [
+                {
+                  question:
+                    "Were you (or your child) physically harmed by the offender?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender threaten to physically harm you (or your child)?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender ever attempt to cause physical harm to you (or your child)?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 20 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+            {
+              title: "Threat of Physical Harm",
+              slug: "s-thp-",
+              questions: [
+                {
+                  question: "Is the offender threatening you or your child?",
+                  value: false,
+                },
+                {
+                  question: "Does the threat include physical harm?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Does the threat place you and your child in fear of impending physical harm?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 20 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+            {
+              title: "Deprivation of Custody",
+              slug: "s-doc-",
+              questions: [
+                {
+                  question:
+                    "Did you have a romantic relationship with the offender?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did this romantic relationship result in the birth of a child?",
+                  value: false,
+                },
+                {
+                  question: "Was this child acknowledged by the offender?",
+                  value: false,
+                },
+                {
+                  question: "Was there failure to provide support? ",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the intent not to provide support apparent/obvious?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 20 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+            {
+              title: "Physical Blackmail",
+              slug: "s-pb-",
+              questions: [
+                {
+                  question:
+                    "Did the offender inflict physical harm on himself? Did the offender threaten to inflict physical harm on himself?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the act pressure you to make actions or decisions against your will? Did the threat pressure you to make actions or decisions against your will?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 20 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+            {
+              title: "Sexual Abuse",
+              slug: "s-sa-",
+              questions: [
+                {
+                  question:
+                    "Did the offender cause or attempt to cause you or your child to engage in any sexual activity which does not constitute rape",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was this done by force or threat of force against you or your child or your immediate family? ",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was this done through physical harm inflicted on you or your child or your immediate family?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was this done through intimidation directed against you or your child or your immediate family?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 10 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+            {
+              title: "Stalking",
+              slug: "s-stk-",
+              questions: [
+                {
+                  question:
+                    "Did the offender stalk or follow you or your child in public or private places?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender commit acts of peering in the window or lingering outside your residence?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender enter or remain in your dwelling against your will?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender destroy your property and personal belongings or inflict harm to your animals or pets?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender engage in any form of harassment or violence?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 10 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+            {
+              title: "Emotional Abuse",
+              slug: "s-ema-",
+              questions: [
+                {
+                  question:
+                    "Did the offender cause mental or emotional anguish to you or your child?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the anguish caused through acts of public ridicule or humiliation?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did you experience repeated verbal and emotional abuse?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender deny you or your child of financial support ",
+                  value: false,
+                },
+                {
+                  question:
+                    "Did the offender deny you custody or access to your minor children?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Was the act committed within 10 years from this date?",
+                  value: false,
+                },
+                {
+                  question:
+                    "Do you have proof of the marriage/dating or sexual relationship/filiation whichever is applicable?",
+                  value: false,
+                },
+              ],
+            },
+          ],
+        },
+        methods: {
+          initializeSections() {
+            this.sections = this.sections
+              .map((s) => parseInt(s))
+              .sort((a, b) => a - b);
+            this.stepInd++;
+          },
+          fileUpload(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) this.userDetails.affidavitComplaint = [];
+            else this.userDetails.affidavitComplaint = [true];
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
