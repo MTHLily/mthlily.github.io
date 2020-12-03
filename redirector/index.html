@@ -9,6 +9,8 @@
     <script>
       let port = null;
       port = window.prompt("Which port to redirect to?", 8080);
+      if (port != null) window.open(`http://127.0.0.1:${port}`, "_self");
+      else window.history.back();
     </script>
   </body>
 </html>
