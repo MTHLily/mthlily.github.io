@@ -16,7 +16,7 @@ class MangaUpdates {
   async getUpdates() {
     let list = [];
     await fetch(
-      "https://mangadex.org/rss/follows/ZpmV7dFu5rKzfS3se6RhaEXg8cYwMtHn?h=0"
+      "https://cors-anywhere.herokuapp.com/https://mangadex.org/rss/follows/ZpmV7dFu5rKzfS3se6RhaEXg8cYwMtHn?h=0"
     )
       .then((res) => res.text())
       .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
