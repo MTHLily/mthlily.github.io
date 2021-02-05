@@ -27,6 +27,14 @@ class MangaUpdates {
             link: node.children[1].innerHTML,
           };
         });
+      })
+      .catch(() => {
+        list = [
+          {
+            title: "Failed to contact server.",
+            link: "",
+          },
+        ];
       });
     return list;
   }

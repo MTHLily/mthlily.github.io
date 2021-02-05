@@ -429,6 +429,17 @@ body {
   position: relative;
 }
 
+#tabs .class {
+  font-weight: 400;
+  margin-right: 1em;
+  color: grey;
+}
+
+#tabs .class span {
+  font-weight: 700;
+  color: #fff;
+}
+
 #tabs .time {
   font-weight: 700;
   margin-right: 1em;
