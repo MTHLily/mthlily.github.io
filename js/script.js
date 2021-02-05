@@ -8,6 +8,7 @@ function engines() {
     d: ["https://duckduckgo.com/html?q=", "DuckDuckGo"],
     y: ["https://youtube.com/results?search_query=", "Youtube"],
     w: ["https://en.wikipedia.org/w/index.php?search=", "Wikipedia"],
+    e: ["https://exhentai.org/?f_cats=769&f_search=", "English"],
   };
 }
 
