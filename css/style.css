@@ -28,7 +28,7 @@
 }
 
 :root {
-  --accent: crimson;
+  --accent: #dc143c;
   --bg: #0f0f12;
   --done: #37eb94;
   --undone: #ff1b91;
@@ -356,6 +356,9 @@ body {
 #tabs ul li[active]:nth-child(4) ~ li:last-child {
   margin: 0 0 0 105px;
 }
+#tabs ul li[active]:nth-child(5) ~ li:last-child {
+  margin: 0 0 0 140px;
+}
 
 #panels {
   overflow: hidden;
@@ -396,6 +399,11 @@ body {
   --flavour: #e4c452;
 }
 
+#panels ul:nth-child(5),
+#tabs ul li[active]:nth-child(5) ~ li:last-child {
+  --flavour: #138cdc;
+}
+
 #panels ul .links {
   box-shadow: inset -1px 0 var(--flavour);
 }
@@ -408,6 +416,9 @@ body {
 }
 #panels ul:nth-child(4) {
   background: #fff url("../img/bg-4.gif") repeat center left fixed;
+}
+#panels ul:nth-child(5) {
+  background: #fff url("../img/bg-5.gif") repeat center left fixed;
 }
 
 #panels ul[active] {
@@ -574,9 +585,13 @@ body {
 }
 
 #panels > ul:not(:first-child) li a::before {
-  content: "> ";
+  /* content: "> "; */
   font-weight: 400;
   display: none;
+}
+
+#panels > ul:not(:first-child) li a:first-child:before {
+  content: "> ";
 }
 
 .weather .edit {
