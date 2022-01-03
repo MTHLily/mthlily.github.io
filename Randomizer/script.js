@@ -206,27 +206,27 @@ function generateStudents(rows, no) {
   header.appendChild(cell);
 
   cell = document.createElement("th");
-  cell.innerHTML = "First Name";
+  cell.innerHTML = "FIRSTNAME";
   header.appendChild(cell);
 
   cell = document.createElement("th");
-  cell.innerHTML = "MI";
+  cell.innerHTML = "MIDDLENAME";
   header.appendChild(cell);
 
   cell = document.createElement("th");
-  cell.innerHTML = "Last Name";
+  cell.innerHTML = "LASTNAME";
   header.appendChild(cell);
 
   cell = document.createElement("th");
-  cell.innerHTML = "Programme";
+  cell.innerHTML = "DIVISIONCODE";
   header.appendChild(cell);
 
   cell = document.createElement("th");
-  cell.innerHTML = "Year Level";
+  cell.innerHTML = "YEARLEVEL";
   header.appendChild(cell);
 
   cell = document.createElement("th");
-  cell.innerHTML = "Section";
+  cell.innerHTML = "COURSECODE";
   header.appendChild(cell);
 
   table.appendChild(header);
@@ -239,31 +239,31 @@ function generateStudents(rows, no) {
     }
 
     cell = document.createElement("td");
-    cell.innerHTML = selected.No;
+    cell.innerHTML = selected["No."];
     row.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.innerHTML = selected["First Name"];
+    cell.innerHTML = selected["FIRSTNAME"];
     row.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.innerHTML = selected.MI;
+    cell.innerHTML = selected["MIDDLENAME"];
     row.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.innerHTML = selected["Last Name"];
+    cell.innerHTML = selected["LASTNAME"];
     row.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.innerHTML = selected["Programme"];
+    cell.innerHTML = selected["DIVISIONCODE"];
     row.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.innerHTML = selected["Year Level"];
+    cell.innerHTML = selected["YEARLEVEL"];
     row.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.innerHTML = selected["Section"];
+    cell.innerHTML = selected["COURSECODE"];
     row.appendChild(cell);
 
     table.appendChild(row);
@@ -292,17 +292,11 @@ function shuffle(array) {
 function isValidRow(k) {
   var keys = Object.keys(k);
 
-  if (k["Full name"] == "TAPING, RYAN DAVE  P.") console.log("TAPING WAS HERE");
-
-  return (
-    keys.includes("Full Name") &&
-    keys.includes("Section") &&
-    keys.includes("Division Code")
-  );
+  return keys.includes("No.");
 }
 
 function studentFilter(row, years) {
-  return years.includes(row["Year Level"]) && isValidRow(row);
+  return years.includes(row["YEARLEVEL"]) && isValidRow(row);
 }
 
 $(".custom-file-input").on("change", function () {
